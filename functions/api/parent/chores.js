@@ -25,7 +25,7 @@ export async function onRequestPost({ request, env }) {
   const is_required = body.is_required ? 1 : 0;
 
   if (!title) return bad("Missing title");
-  if (!Number.isFinite(points) or points < 0) return bad("Invalid points");
+  if (!Number.isFinite(points) || points < 0) return bad("Invalid points");
 
   const id = uid("CH_");
   await env.DB.prepare(

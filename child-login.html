@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Child Login | Chores → Payday</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div class="wrap-narrow">
+    <div class="text-center mb-lg">
+      <a class="link" href="index.html">← Back to Home</a>
+    </div>
+    
+    <div class="auth-card">
+      <div class="auth-icon" style="background: linear-gradient(135deg, #F59E0B, #FBBF24);">⭐</div>
+      <h1>Hi there!</h1>
+      <p class="subtitle">Enter your special code to see your chores</p>
+      
+      <div id="errorMsg" class="alert alert-error hidden"></div>
+      
+      <form id="childLoginForm">
+        <div class="input-group">
+          <label for="childCode">Your Code</label>
+          <input type="text" id="childCode" class="input code-input" placeholder="ABCD1234" required autocomplete="off" maxlength="8">
+          <div class="hint">Ask your parent for your code!</div>
+        </div>
+        
+        <div class="input-group hidden" id="pinGroup">
+          <label for="childPin">PIN</label>
+          <input type="password" id="childPin" class="input pin-input" placeholder="••••" inputmode="numeric" maxlength="6">       </div>
+        
+        <button type="submit" class="btn btn-gold btn-block btn-lg">Let's Go! 🚀</button>
+      </form>
+      
+      <div class="auth-footer">
+        <p class="muted">Are you a parent? <a href="login.html">Login here</a></p>
+      </div>
+    </div>
+  </div>
+  <script src="assets/app.js"></script>
+  <script>if (window.AppChildLogin) AppChildLogin.init();</script>
+</body>
+</html>

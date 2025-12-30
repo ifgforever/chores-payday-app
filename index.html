@@ -1,15 +1,13 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Chores → Payday | Family Chore & Rewards System</title>
   <link rel="stylesheet" href="assets/style.css">
-  <meta name="description" content="A simple, kid-friendly chore tracking app. Parents define chores, kids complete them, and everyone celebrates on Payday Friday!">
 </head>
 <body>
   <div class="wrap">
-    <!-- Hero Section -->
     <section class="hero">
       <div class="hero-icon">💰</div>
       <h1>Chores → Payday</h1>
@@ -18,108 +16,83 @@
         Complete chores during the week, earn points on <strong>Payday Friday</strong>!
       </p>
       <div class="hero-buttons">
-        <a class="btn btn-primary btn-lg" href="parent.html">
-          👨‍👩‍👧‍👦 Parent Dashboard
-        </a>
-        <a class="btn btn-gold btn-lg" href="child.html">
-          ⭐ Child Dashboard
-        </a>
+        <a class="btn btn-primary btn-lg" href="login.html">👨‍👩‍👧‍👦 Parent Login</a>
+        <a class="btn btn-gold btn-lg" href="child-login.html">⭐ Child Login</a>
       </div>
     </section>
 
-    <!-- Features -->
     <section class="features-grid">
       <div class="feature-card">
         <div class="feature-icon card-icon purple">📋</div>
         <h3>Simple Chores</h3>
-        <p>Create daily or weekly chores with point values. Mark some as required for payday eligibility.</p>
+        <p>Create chores with point values. Mark some as required for payday eligibility.</p>
       </div>
-      
       <div class="feature-card">
         <div class="feature-icon card-icon gold">⭐</div>
         <h3>Earn Points</h3>
-        <p>Kids check off completed chores, parents approve, and points add up throughout the week.</p>
+        <p>Kids check off completed chores, parents approve, and points add up.</p>
       </div>
-      
       <div class="feature-card">
         <div class="feature-icon card-icon green">🎉</div>
         <h3>Friday Payday</h3>
-        <p>When Friday comes, points convert to rewards — like Roblox gift cards or allowance!</p>
+        <p>Points convert to rewards — like gift cards or allowance!</p>
       </div>
     </section>
 
-    <!-- How It Works -->
     <div class="card">
       <div class="card-header">
-        <h2>
-          <span class="card-icon blue">🚀</span>
-          How It Works
-        </h2>
+        <h2><span class="card-icon blue">🚀</span> How It Works</h2>
       </div>
-      
       <div class="list">
         <div class="item">
           <div class="item-icon card-icon purple">1</div>
           <div class="item-content">
-            <div class="item-title">Parents set up chores</div>
-            <div class="item-meta">Add children, create chores, set point values, and mark which ones are required</div>
+            <div class="item-title">Parents create an account</div>
+            <div class="item-meta">Sign up, add children, and create chores with point values</div>
           </div>
         </div>
-        
         <div class="item">
           <div class="item-icon card-icon gold">2</div>
           <div class="item-content">
-            <div class="item-title">Kids complete & check in</div>
-            <div class="item-meta">Children log into their dashboard and tap "I did it!" when chores are done</div>
+            <div class="item-title">Share the child code</div>
+            <div class="item-meta">Each child gets a unique code to log in (no email needed!)</div>
           </div>
         </div>
-        
         <div class="item">
           <div class="item-icon card-icon pink">3</div>
           <div class="item-content">
-            <div class="item-title">Parents approve</div>
-            <div class="item-meta">Quick approval or rejection of submitted chores keeps things honest</div>
+            <div class="item-title">Kids complete & check in</div>
+            <div class="item-meta">Children tap "I did it!" when chores are done</div>
           </div>
         </div>
-        
         <div class="item">
           <div class="item-icon card-icon green">4</div>
           <div class="item-content">
             <div class="item-title">Payday Friday!</div>
-            <div class="item-meta">If all required chores are complete, points are tallied and rewards are earned</div>
+            <div class="item-meta">Complete required chores = earn your points!</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- API Check (for developers/debugging) -->
     <div class="card">
       <div class="card-header">
-        <h2>
-          <span class="card-icon blue">🔧</span>
-          System Status
-        </h2>
+        <h2><span class="card-icon blue">🔧</span> System Status</h2>
       </div>
-      <p class="muted mb-md">Check if the backend is running correctly.</p>
+      <p class="muted mb-md">Check if the backend is running.</p>
       <div class="form-row">
-        <button class="btn btn-secondary" id="pingBtn">Test API Connection</button>
+        <button class="btn btn-secondary" id="pingBtn">Test API</button>
       </div>
       <div class="debug-panel mt-md">
-        <pre id="pingOut">Click the button to test the API...</pre>
+        <pre id="pingOut">Click to test...</pre>
       </div>
     </div>
 
-    <!-- Footer -->
     <footer class="text-center mt-lg">
-      <p class="muted">
-        Built with ❤️ for families • Powered by Cloudflare Pages + D1
-      </p>
+      <p class="muted">Built with ❤️ for families • Powered by Cloudflare</p>
     </footer>
   </div>
-
   <script src="assets/app.js"></script>
-  <script>
-    if (window.AppHome) window.AppHome.init();
-  </script>
+  <script>if (window.AppHome) AppHome.init();</script>
 </body>
 </html>

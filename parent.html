@@ -1,14 +1,13 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Parent Dashboard | Chores → Payday</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
   <div class="wrap">
-    <!-- Header -->
     <div class="top">
       <div class="header">
         <div class="header-icon">👨‍👩‍👧‍👦</div>
@@ -17,148 +16,72 @@
           <span class="subtitle">Manage chores and approve submissions</span>
         </div>
       </div>
-      <a class="link" href="index.html">← Back to Home</a>
-    </div>
-
-    <!-- Admin Token -->
-    <div class="card">
-      <div class="card-header">
-        <h2>
-          <span class="card-icon purple">🔐</span>
-          Admin Access
-        </h2>
-      </div>
-      <p class="muted mb-md">
-        Enter your admin token to manage chores and children. 
-        This should match the <code>ADMIN_TOKEN</code> environment variable in your Cloudflare Pages settings.
-      </p>
-      <div class="form-row">
-        <input 
-          type="password" 
-          id="adminToken" 
-          class="input" 
-          placeholder="Enter your admin token" 
-          autocomplete="off"
-        />
-        <button class="btn btn-primary" id="saveToken">Save Token</button>
+      <div id="userInfo" class="user-info">
+        <!-- Filled by JS -->
       </div>
     </div>
 
     <!-- Pending Approvals -->
     <div class="card">
       <div class="card-header">
-        <h2>
-          <span class="card-icon gold">⏳</span>
-          Pending Approvals
-        </h2>
+        <h2><span class="card-icon gold">⏳</span> Pending Approvals</h2>
         <button class="btn btn-sm btn-secondary" id="refreshApprovals">↻ Refresh</button>
       </div>
-      <p class="muted mb-md">Chores submitted by children that need your approval.</p>
-      <div id="approvalsList" class="list">
-        <div class="empty-state">
-          <div class="empty-state-icon">✅</div>
-          <div class="empty-state-title">Loading...</div>
-        </div>
-      </div>
+      <p class="muted mb-md">Chores waiting for your approval.</p>
+      <div id="approvalsList" class="list"></div>
     </div>
 
-    <!-- Two Column Grid -->
     <div class="grid-2">
-      <!-- Children Section -->
+      <!-- Children -->
       <div class="card">
         <div class="card-header">
-          <h2>
-            <span class="card-icon pink">👶</span>
-            Children
-          </h2>
+          <h2><span class="card-icon pink">👶</span> Children</h2>
           <button class="btn btn-sm btn-secondary" id="refreshChildren">↻</button>
         </div>
         <div class="form-row">
-          <input 
-            type="text" 
-            id="childName" 
-            class="input" 
-            placeholder="Child's name (e.g., Emma)" 
-          />
+          <input type="text" id="childName" class="input" placeholder="Child's name">
+        </div>
+        <div class="form-row">
+          <input type="text" id="childPin" class="input" placeholder="PIN (optional, 4-6 digits)" maxlength="6" style="max-width: 160px;">
           <button class="btn btn-primary" id="addChild">+ Add</button>
         </div>
-        <div id="childrenList" class="list mt-md">
-          <!-- Children will be loaded here -->
-        </div>
+        <p class="muted mt-sm mb-md">Each child gets a unique code to log in.</p>
+        <div id="childrenList" class="list"></div>
       </div>
 
-      <!-- Chores Section -->
+      <!-- Chores -->
       <div class="card">
         <div class="card-header">
-          <h2>
-            <span class="card-icon blue">🧹</span>
-            Chores
-          </h2>
+          <h2><span class="card-icon blue">🧹</span> Chores</h2>
           <button class="btn btn-sm btn-secondary" id="refreshChores">↻</button>
         </div>
         <div class="form-row">
-          <input 
-            type="text" 
-            id="choreTitle" 
-            class="input" 
-            placeholder="Chore name (e.g., Make bed)" 
-          />
+          <input type="text" id="choreTitle" class="input" placeholder="Chore name">
         </div>
         <div class="form-row">
-          <input 
-            type="number" 
-            id="chorePoints" 
-            class="input" 
-            placeholder="Points (e.g., 10)" 
-            min="0"
-            style="max-width: 140px;"
-          />
+          <input type="number" id="chorePoints" class="input" placeholder="Points" min="0" style="max-width: 100px;">
           <label class="checkbox-label">
-            <input type="checkbox" id="choreRequired" />
-            Required for payday
+            <input type="checkbox" id="choreRequired">
+            Required
           </label>
           <button class="btn btn-primary" id="addChore">+ Add</button>
         </div>
-        <div id="choresList" class="list mt-md">
-          <!-- Chores will be loaded here -->
-        </div>
+        <div id="choresList" class="list mt-md"></div>
       </div>
     </div>
 
-    <!-- Payday Section -->
+    <!-- Payday -->
     <div class="card">
       <div class="card-header">
-        <h2>
-          <span class="card-icon green">💰</span>
-          Run Payday
-        </h2>
+        <h2><span class="card-icon green">💰</span> Run Payday</h2>
       </div>
       <p class="muted mb-md">
-        Calculate and distribute rewards for the current week. 
-        Children must complete all <strong>required</strong> chores to earn their points.
-        Points are capped at the weekly maximum (default: 100 points).
+        Calculate rewards for the week. Children must complete all <strong>required</strong> chores to earn points.
       </p>
-      <div class="form-row">
-        <button class="btn btn-gold btn-lg" id="runPayday">
-          🎉 Run Payday Now
-        </button>
-      </div>
+      <button class="btn btn-gold btn-lg" id="runPayday">🎉 Run Payday Now</button>
     </div>
-
-    <!-- Debug Panel -->
-    <details class="card">
-      <summary style="cursor: pointer; font-weight: 700; color: var(--text-secondary);">
-        🔧 Debug Console (click to expand)
-      </summary>
-      <div class="debug-panel mt-md">
-        <pre id="debugOut">API responses will appear here...</pre>
-      </div>
-    </details>
   </div>
-
   <script src="assets/app.js"></script>
-  <script>
-    if (window.AppParent) window.AppParent.init();
-  </script>
+  <script>if (window.AppParent) AppParent.init();</script>
 </body>
 </html>

@@ -1,0 +1,8 @@
+name = "chores-payday-app"
+compatibility_date = "2024-01-01"
+pages_build_output_dir = "."
+
+[[d1_databases]]
+binding = "DB"
+database_name = "chores-db"
+database_id = "5eeda6f6-374f-4b65-aa84-e0ccb320681d"

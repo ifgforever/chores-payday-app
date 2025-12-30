@@ -1,122 +1,62 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>My Chores | Chores → Payday</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
   <div class="wrap">
-    <!-- Header -->
     <div class="top">
       <div class="header">
-        <div class="header-icon">⭐</div>
+        <div class="header-icon" style="background: linear-gradient(135deg, #F59E0B, #FBBF24);">⭐</div>
         <div class="header-text">
           <h1>My Chores</h1>
           <span class="subtitle">Complete chores, earn rewards!</span>
         </div>
       </div>
-      <a class="link" href="index.html">← Back to Home</a>
+      <div id="userInfo" class="user-info">
+        <!-- Filled by JS -->
+      </div>
     </div>
 
-    <!-- Payday Countdown Banner -->
+    <!-- Payday Countdown -->
     <div class="payday-banner">
       <h3>🎁 Payday Countdown</h3>
-      <div class="payday-countdown" id="paydayCountdown">
-        Loading...
-      </div>
+      <div class="payday-countdown" id="paydayCountdown">Loading...</div>
     </div>
 
-    <!-- Child ID Card -->
-    <div class="card">
-      <div class="card-header">
-        <h2>
-          <span class="card-icon purple">🔑</span>
-          Your ID
-        </h2>
-      </div>
-      <p class="muted mb-md">
-        Enter the special ID your parent gave you to see your chores.
-      </p>
-      <div class="form-row">
-        <input 
-          type="text" 
-          id="childId" 
-          class="input" 
-          placeholder="Enter your ID (e.g., C1042)" 
-          autocomplete="off"
-        />
-        <button class="btn btn-primary" id="saveChildId">Save My ID</button>
-      </div>
-    </div>
-
-    <!-- Stats Overview -->
+    <!-- Stats -->
     <div id="choreStats" class="stats-row">
-      <div class="stat-card">
-        <div class="stat-value">-</div>
-        <div class="stat-label">Done Today</div>
-      </div>
-      <div class="stat-card gold">
-        <div class="stat-value">-</div>
-        <div class="stat-label">Points Earned</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value">-</div>
-        <div class="stat-label">Possible Points</div>
-      </div>
+      <div class="stat-card"><div class="stat-value">-</div><div class="stat-label">Done Today</div></div>
+      <div class="stat-card gold"><div class="stat-value">-</div><div class="stat-label">Points Earned</div></div>
+      <div class="stat-card"><div class="stat-value">-</div><div class="stat-label">Possible</div></div>
     </div>
 
     <!-- Today's Chores -->
     <div class="card">
       <div class="card-header">
-        <h2>
-          <span class="card-icon blue">📋</span>
-          Today's Chores
-        </h2>
-        <button class="btn btn-sm btn-secondary" id="refreshChild">↻ Refresh</button>
+        <h2><span class="card-icon blue">📋</span> Today's Chores</h2>
+        <button class="btn btn-sm btn-secondary" id="refreshChores">↻ Refresh</button>
       </div>
       <p class="muted mb-md">
         Tap <strong>"I did it!"</strong> when you finish a chore. 
-        <span style="color: var(--danger);">⭐ Required</span> chores must be done for payday!
+        <span class="text-danger">⭐ Required</span> chores must be done for payday!
       </p>
-      <div id="childChoresList" class="list">
-        <div class="empty-state">
-          <div class="empty-state-icon">🔑</div>
-          <div class="empty-state-title">Enter your ID above</div>
-          <div class="empty-state-text">Save your Child ID to see your chores</div>
-        </div>
-      </div>
+      <div id="childChoresList" class="list"></div>
     </div>
 
     <!-- Notifications -->
     <div class="card">
       <div class="card-header">
-        <h2>
-          <span class="card-icon gold">🔔</span>
-          My Updates
-        </h2>
+        <h2><span class="card-icon gold">🔔</span> My Updates</h2>
         <button class="btn btn-sm btn-secondary" id="refreshNotifications">↻</button>
       </div>
-      <div id="notificationsList" class="list">
-        <!-- Notifications will load here -->
-      </div>
+      <div id="notificationsList" class="list"></div>
     </div>
-
-    <!-- Debug Panel (hidden by default for kids) -->
-    <details class="card">
-      <summary style="cursor: pointer; font-weight: 700; color: var(--text-secondary);">
-        🔧 Debug Info (for grown-ups)
-      </summary>
-      <div class="debug-panel mt-md">
-        <pre id="childDebug">API data will appear here...</pre>
-      </div>
-    </details>
   </div>
-
   <script src="assets/app.js"></script>
-  <script>
-    if (window.AppChild) window.AppChild.init();
-  </script>
+  <script>if (window.AppChild) AppChild.init();</script>
 </body>
 </html>

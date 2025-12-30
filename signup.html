@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create Account | Chores → Payday</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div class="wrap-narrow">
+    <div class="text-center mb-lg">
+      <a class="link" href="index.html">← Back to Home</a>
+    </div>
+    
+    <div class="auth-card">
+      <div class="auth-icon">✨</div>
+      <h1>Create Account</h1>
+      <p class="subtitle">Start managing your family's chores today</p>
+      
+      <div id="errorMsg" class="alert alert-error hidden"></div>
+      
+      <form id="signupForm">
+        <div class="input-group">
+          <label for="displayName">Your Name (optional)</label>
+          <input type="text" id="displayName" class="input" placeholder="Mom / Dad / Guardian" autocomplete="name">
+        </div>
+        
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" class="input" placeholder="parent@example.com" required autocomplete="email">
+        </div>
+        
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" class="input" placeholder="At least 8 characters" required autocomplete="new-password" minlength="8">
+          <div class="hint">Must be at least 8 characters</div>
+        </div>
+        
+        <div class="input-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" id="confirmPassword" class="input" placeholder="••••••••" required autocomplete="new-password">
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-block btn-lg">Create Account</button>
+      </form>
+      
+      <div class="auth-footer">
+        <p class="muted">Already have an account? <a href="login.html">Sign in</a></p>
+      </div>
+    </div>
+  </div>
+  <script src="assets/app.js"></script>
+  <script>if (window.AppParentSignup) AppParentSignup.init();</script>
+</body>
+</html>

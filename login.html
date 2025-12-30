@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Parent Login | Chores → Payday</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div class="wrap-narrow">
+    <div class="text-center mb-lg">
+      <a class="link" href="index.html">← Back to Home</a>
+    </div>
+    
+    <div class="auth-card">
+      <div class="auth-icon">👨‍👩‍👧‍👦</div>
+      <h1>Parent Login</h1>
+      <p class="subtitle">Sign in to manage your family's chores</p>
+      
+      <div id="errorMsg" class="alert alert-error hidden"></div>
+      
+      <form id="loginForm">
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" class="input" placeholder="parent@example.com" required autocomplete="email">
+        </div>
+        
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" class="input" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-block btn-lg">Sign In</button>
+      </form>
+      
+      <div class="auth-footer">
+        <p class="muted">Don't have an account? <a href="signup.html">Create one</a></p>
+      </div>
+    </div>
+    
+    <div class="text-center mt-lg">
+      <p class="muted">Looking for the child login? <a href="child-login.html" class="link">Go here</a></p>
+    </div>
+  </div>
+  <script src="assets/app.js"></script>
+  <script>if (window.AppParentLogin) AppParentLogin.init();</script>
+</body>
+</html>

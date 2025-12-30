@@ -2,67 +2,163 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Parent Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Parent Dashboard | Chores → Payday</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
   <div class="wrap">
+    <!-- Header -->
     <div class="top">
-      <h1>Parent Dashboard</h1>
-      <a class="link" href="index.html">← Home</a>
+      <div class="header">
+        <div class="header-icon">👨‍👩‍👧‍👦</div>
+        <div class="header-text">
+          <h1>Parent Dashboard</h1>
+          <span class="subtitle">Manage chores and approve submissions</span>
+        </div>
+      </div>
+      <a class="link" href="index.html">← Back to Home</a>
     </div>
 
+    <!-- Admin Token -->
     <div class="card">
-      <h2>Admin Token (MVP)</h2>
-      <p class="muted">Set this to your Cloudflare Pages env var <code>ADMIN_TOKEN</code>.</p>
-      <div class="row">
-        <input id="adminToken" class="input" placeholder="Paste ADMIN_TOKEN here" />
-        <button class="btn" id="saveToken">Save</button>
+      <div class="card-header">
+        <h2>
+          <span class="card-icon purple">🔐</span>
+          Admin Access
+        </h2>
       </div>
-      <p class="muted">Stored in localStorage on this browser.</p>
+      <p class="muted mb-md">
+        Enter your admin token to manage chores and children. 
+        This should match the <code>ADMIN_TOKEN</code> environment variable in your Cloudflare Pages settings.
+      </p>
+      <div class="form-row">
+        <input 
+          type="password" 
+          id="adminToken" 
+          class="input" 
+          placeholder="Enter your admin token" 
+          autocomplete="off"
+        />
+        <button class="btn btn-primary" id="saveToken">Save Token</button>
+      </div>
     </div>
 
-    <div class="grid">
+    <!-- Pending Approvals -->
+    <div class="card">
+      <div class="card-header">
+        <h2>
+          <span class="card-icon gold">⏳</span>
+          Pending Approvals
+        </h2>
+        <button class="btn btn-sm btn-secondary" id="refreshApprovals">↻ Refresh</button>
+      </div>
+      <p class="muted mb-md">Chores submitted by children that need your approval.</p>
+      <div id="approvalsList" class="list">
+        <div class="empty-state">
+          <div class="empty-state-icon">✅</div>
+          <div class="empty-state-title">Loading...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Two Column Grid -->
+    <div class="grid-2">
+      <!-- Children Section -->
       <div class="card">
-        <h2>Children</h2>
-        <div class="row">
-          <input id="childName" class="input" placeholder="Child name (e.g., Ava)" />
-          <button class="btn" id="addChild">Add Child</button>
+        <div class="card-header">
+          <h2>
+            <span class="card-icon pink">👶</span>
+            Children
+          </h2>
+          <button class="btn btn-sm btn-secondary" id="refreshChildren">↻</button>
         </div>
-        <div class="row">
-          <button class="btn secondary" id="refreshChildren">Refresh</button>
+        <div class="form-row">
+          <input 
+            type="text" 
+            id="childName" 
+            class="input" 
+            placeholder="Child's name (e.g., Emma)" 
+          />
+          <button class="btn btn-primary" id="addChild">+ Add</button>
         </div>
-        <div id="childrenList" class="list"></div>
+        <div id="childrenList" class="list mt-md">
+          <!-- Children will be loaded here -->
+        </div>
       </div>
 
+      <!-- Chores Section -->
       <div class="card">
-        <h2>Chores</h2>
-        <div class="row">
-          <input id="choreTitle" class="input" placeholder="Chore title (e.g., Make bed)" />
+        <div class="card-header">
+          <h2>
+            <span class="card-icon blue">🧹</span>
+            Chores
+          </h2>
+          <button class="btn btn-sm btn-secondary" id="refreshChores">↻</button>
         </div>
-        <div class="row">
-          <input id="chorePoints" class="input" type="number" min="0" placeholder="Points (e.g., 10)" />
-          <label class="check">
-            <input id="choreRequired" type="checkbox" />
-            Required
+        <div class="form-row">
+          <input 
+            type="text" 
+            id="choreTitle" 
+            class="input" 
+            placeholder="Chore name (e.g., Make bed)" 
+          />
+        </div>
+        <div class="form-row">
+          <input 
+            type="number" 
+            id="chorePoints" 
+            class="input" 
+            placeholder="Points (e.g., 10)" 
+            min="0"
+            style="max-width: 140px;"
+          />
+          <label class="checkbox-label">
+            <input type="checkbox" id="choreRequired" />
+            Required for payday
           </label>
-          <button class="btn" id="addChore">Add Chore</button>
+          <button class="btn btn-primary" id="addChore">+ Add</button>
         </div>
-        <div class="row">
-          <button class="btn secondary" id="refreshChores">Refresh</button>
+        <div id="choresList" class="list mt-md">
+          <!-- Chores will be loaded here -->
         </div>
-        <div id="choresList" class="list"></div>
       </div>
     </div>
 
+    <!-- Payday Section -->
     <div class="card">
-      <h2>Debug</h2>
-      <pre id="debugOut" class="pre"></pre>
+      <div class="card-header">
+        <h2>
+          <span class="card-icon green">💰</span>
+          Run Payday
+        </h2>
+      </div>
+      <p class="muted mb-md">
+        Calculate and distribute rewards for the current week. 
+        Children must complete all <strong>required</strong> chores to earn their points.
+        Points are capped at the weekly maximum (default: 100 points).
+      </p>
+      <div class="form-row">
+        <button class="btn btn-gold btn-lg" id="runPayday">
+          🎉 Run Payday Now
+        </button>
+      </div>
     </div>
+
+    <!-- Debug Panel -->
+    <details class="card">
+      <summary style="cursor: pointer; font-weight: 700; color: var(--text-secondary);">
+        🔧 Debug Console (click to expand)
+      </summary>
+      <div class="debug-panel mt-md">
+        <pre id="debugOut">API responses will appear here...</pre>
+      </div>
+    </details>
   </div>
 
   <script src="assets/app.js"></script>
-  <script>window.AppParent.init();</script>
+  <script>
+    if (window.AppParent) window.AppParent.init();
+  </script>
 </body>
 </html>

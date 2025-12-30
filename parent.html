@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Parent Dashboard</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <h1>Parent Dashboard</h1>
+      <a class="link" href="index.html">← Home</a>
+    </div>
+
+    <div class="card">
+      <h2>Admin Token (MVP)</h2>
+      <p class="muted">Set this to your Cloudflare Pages env var <code>ADMIN_TOKEN</code>.</p>
+      <div class="row">
+        <input id="adminToken" class="input" placeholder="Paste ADMIN_TOKEN here" />
+        <button class="btn" id="saveToken">Save</button>
+      </div>
+      <p class="muted">Stored in localStorage on this browser.</p>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h2>Children</h2>
+        <div class="row">
+          <input id="childName" class="input" placeholder="Child name (e.g., Ava)" />
+          <button class="btn" id="addChild">Add Child</button>
+        </div>
+        <div class="row">
+          <button class="btn secondary" id="refreshChildren">Refresh</button>
+        </div>
+        <div id="childrenList" class="list"></div>
+      </div>
+
+      <div class="card">
+        <h2>Chores</h2>
+        <div class="row">
+          <input id="choreTitle" class="input" placeholder="Chore title (e.g., Make bed)" />
+        </div>
+        <div class="row">
+          <input id="chorePoints" class="input" type="number" min="0" placeholder="Points (e.g., 10)" />
+          <label class="check">
+            <input id="choreRequired" type="checkbox" />
+            Required
+          </label>
+          <button class="btn" id="addChore">Add Chore</button>
+        </div>
+        <div class="row">
+          <button class="btn secondary" id="refreshChores">Refresh</button>
+        </div>
+        <div id="choresList" class="list"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Debug</h2>
+      <pre id="debugOut" class="pre"></pre>
+    </div>
+  </div>
+
+  <script src="assets/app.js"></script>
+  <script>window.AppParent.init();</script>
+</body>
+</html>

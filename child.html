@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Child Dashboard</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <h1>Child Dashboard</h1>
+      <a class="link" href="index.html">← Home</a>
+    </div>
+
+    <div class="card">
+      <h2>Child ID</h2>
+      <div class="row">
+        <input id="childId" class="input" placeholder="Enter Child ID (e.g., C1042)" />
+        <button class="btn" id="saveChildId">Save</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Chores</h2>
+      <div class="row">
+        <button class="btn secondary" id="refreshChild">Refresh</button>
+      </div>
+      <div id="childChoresList" class="list"></div>
+    </div>
+
+    <div class="card">
+      <h2>Debug</h2>
+      <pre id="childDebug" class="pre"></pre>
+    </div>
+  </div>
+
+  <script src="assets/app.js"></script>
+  <script>window.AppChild.init();</script>
+</body>
+</html>

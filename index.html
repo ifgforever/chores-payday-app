@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Chores → Payday</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div class="wrap">
+    <h1>Chores → Payday</h1>
+    <p class="muted">MVP demo (Cloudflare Pages + Functions + D1).</p>
+
+    <div class="card">
+      <h2>Pages</h2>
+      <div class="row">
+        <a class="btn" href="parent.html">Parent Dashboard</a>
+        <a class="btn" href="child.html">Child Dashboard</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>API sanity check</h2>
+      <p><code>/api/ping</code> should return JSON once deployed.</p>
+      <button class="btn" id="pingBtn">Ping API</button>
+      <pre id="pingOut" class="pre"></pre>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("pingBtn").addEventListener("click", async () => {
+      const out = document.getElementById("pingOut");
+      out.textContent = "Loading...";
+      try {
+        const r = await fetch("/api/ping");
+        out.textContent = await r.text();
+      } catch (e) {
+        out.textContent = String(e);
+      }
+    });
+  </script>
+</body>
+</html>

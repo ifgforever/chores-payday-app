@@ -75,17 +75,25 @@
       </div>
     </div>
 
+
     <div class="card">
       <div class="card-header">
-        <h2><span class="card-icon blue">🔧</span> System Status</h2>
+        <h2><span class="card-icon gold">💬</span> Contact</h2>
       </div>
-      <p class="muted mb-md">Check if the backend is running.</p>
-      <div class="form-row">
-        <button class="btn btn-secondary" id="pingBtn">Test API</button>
-      </div>
-      <div class="debug-panel mt-md">
-        <pre id="pingOut">Click to test...</pre>
-      </div>
+      <p class="muted mb-md">Have a question or want to collaborate? Send us a note.</p>
+      <form id="contactForm" class="form" method="POST" action="https://formspree.io/f/mbdlplke" data-formspree-id="yourFormId">
+        <div class="form-row">
+          <input class="input" type="text" id="contactName" name="name" placeholder="Your name" autocomplete="name">
+          <input class="input" type="email" id="contactEmail" name="email" placeholder="you@example.com" required autocomplete="email">
+        </div>
+        <div class="form-row">
+          <textarea class="input" id="contactMessage" name="message" placeholder="How can we help?" rows="4" required></textarea>
+        </div>
+        <div class="form-row">
+          <button class="btn btn-primary" type="submit" id="contactSubmit">Send message</button>
+          <div id="contactStatus" class="muted" aria-live="polite"></div>
+        </div>
+      </form>
     </div>
 
     <footer class="text-center mt-lg">

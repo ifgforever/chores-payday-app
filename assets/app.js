@@ -610,22 +610,59 @@
         }
       }
 
-      const pingBtn = $("pingBtn");
-      const pingOut = $("pingOut");
-      if (pingBtn && pingOut) {
-        pingBtn.onclick = async () => {
-          setLoading(pingBtn, true);
-          pingOut.textContent = "Connecting...";
-          try {
-            const res = await fetch("/api/ping");
-            pingOut.textContent = await res.text();
-            showToast("API connected!", "success");
-          } catch (e) {
-            pingOut.textContent = String(e);
-          } finally {
-            setLoading(pingBtn, false);
+const contactForm = $("contactForm");
+      const contactStatus = $("contactStatus");
+      const contactSubmit = $("contactSubmit");
+      if (contactForm && contactSubmit) {
+        contactForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const name = $("contactName")?.value.trim();
+          const email = $("contactEmail")?.value.trim();
+          const message = $("contactMessage")?.value.trim();
+
+          contactStatus.textContent = "";
+          setLoading(contactSubmit, true);
+
+          const formspreeId = contactForm.dataset.formspreeId;
+          const endpoint = formspreeId && formspreeId !== "yourFormId"
+            ? `https://formspree.io/f/${formspreeId}`
+            : (contactForm.action || "");
+
+          if (!endpoint || endpoint.includes("yourFormId")) {
+            const msg = "Add your Formspree form ID to the contact form (data-formspree-id).";
+            showToast(msg, "error");
+            contactStatus.textContent = msg;
+            setLoading(contactSubmit, false);
+            return;
           }
-        };
+
+          try {
+            const formData = new FormData(contactForm);
+            formData.set("name", name || "");
+            formData.set("email", email || "");
+            formData.set("message", message || "");
+
+            const res = await fetch(endpoint, {
+              method: "POST",
+              headers: { Accept: "application/json" },
+              body: formData
+            });
+
+            const data = await res.json().catch(() => ({}));
+            if (!res.ok) {
+              throw new Error(data.error || "Failed to send message");
+            }
+
+            contactForm.reset();
+            showToast("Message sent! We'll reply soon.");
+            contactStatus.textContent = "Message delivered via Formspree.";
+          } catch (err) {
+            showToast(err.message || "Failed to send message", "error");
+            contactStatus.textContent = err.message || "Something went wrong.";
+          } finally {
+            setLoading(contactSubmit, false);
+          }
+        });
       }
     }
   };
